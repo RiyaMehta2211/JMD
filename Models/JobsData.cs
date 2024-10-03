@@ -1,6 +1,6 @@
 using System;
 
-namespace JMD
+namespace JMD.Models
 {
     public class JobsData
     {

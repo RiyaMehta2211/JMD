@@ -1,6 +1,6 @@
 using System;
 
-namespace JMD
+namespace JMD.Models
 {
 	public class JobOwners
 	{
@@ -12,6 +12,6 @@ namespace JMD
 		public int JobOwnerID { get; set; }
 		public string JobOwnerName { get; set; }
 		public int JobID { get; set; }
-		public Job job { get; set; }
+		public Jobs job { get; set; }
 	}
 }
