@@ -1,0 +1,6 @@
+@WebApplicationNewRiya_HostAddress = http://localhost:5270
+
+GET {{WebApplicationNewRiya_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
