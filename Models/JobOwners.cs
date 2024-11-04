@@ -11,7 +11,7 @@ namespace JMD.Models
 
 		public int JobOwnerID { get; set; }
 		public string JobOwnerName { get; set; }
-		public int JobID { get; set; }
-		public Jobs job { get; set; }
+		//public int JobID { get; set; }
+		//public Jobs job { get; set; }
 	}
 }

@@ -1,0 +1,35 @@
+USE JMD;
+GO
+
+CREATE TABLE dbo.JobLogs
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	JobID INT,
+	RunDateTime date,
+	job_status NVARCHAR(1000)
+);
+
+GO
+
+INSERT INTO dbo.JobLogs(JobID, RunDateTime, job_status)
+SELECT jc.Id, jc.ExecuteDate, eth.Status
+FROM MyDashboard.dbo.JobConfiguration jc
+LEFT JOIN MyDashboard.dbo.EmailTemplateHistory eth ON jc.Id = eth.Id;
+GO
+
+CREATE TABLE dbo.Jobs(
+  JobID INT PRIMARY KEY,
+  JobType VARCHAR(50) NOT NULL,
+  JobName NVARCHAR(100),
+  JobFrequency NVARCHAR(100)
+);
+
+GO
+
+INSERT INTO dbo.Jobs(JobID, JobType, JobName, JobFrequency)
+SELECT jc.Id, 'ENE Jobs', jc.ScheduleName, jc.FrequencyType
+FROM MyDashboard.dbo.JobConfiguration jc
+GO
+
+select * from dbo.JobLogs
+select * from dbo.Jobs

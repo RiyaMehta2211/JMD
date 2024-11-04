@@ -8,12 +8,9 @@ namespace JMD.Models
 		{
 
 		}
-
-		public int JobDependencyID { get; set; }
 		public int DependentJobID { get; set; }
-		public int DependencyDirection { get; set; }
+        public int JobDependencyID { get; set; }
+        public int DependencyDirection { get; set; }
 		public string Dependency { get; set; }
-		public int JobID { get; set; }
-		public Jobs job { get; set; }
 	}
 }
