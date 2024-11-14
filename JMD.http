@@ -1,6 +1,6 @@
-@WebApplicationNewRiya_HostAddress = http://localhost:5270
+@JMD_HostAddress = http://localhost:5270
 
-GET {{WebApplicationNewRiya_HostAddress}}/weatherforecast/
+GET {{JMD_HostAddress}}/JobsData/Index
 Accept: application/json
 
 ###
