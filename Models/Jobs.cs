@@ -1,8 +1,6 @@
-using System;
-
 namespace JMD.Models
 {
-	public class Jobs
+    public class Jobs
 	{
 		public Jobs()
 		{

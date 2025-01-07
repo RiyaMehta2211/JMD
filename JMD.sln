@@ -5,8 +5,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMD", "JMD.csproj", "{C8E7419B-D9E2-4750-9D9D-8BE3E663878D}"
 EndProject
 Global
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C66AA8CE-EC74-4930-B61E-7804780FAD75}
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C8E7419B-D9E2-4750-9D9D-8BE3E663878D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -14,14 +15,10 @@ Global
 		{C8E7419B-D9E2-4750-9D9D-8BE3E663878D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8E7419B-D9E2-4750-9D9D-8BE3E663878D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-EndGlobal
-ALSE
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C66AA8CE-EC74-4930-B61E-7804780FAD75}
 	EndGlobalSection
 EndGlobal

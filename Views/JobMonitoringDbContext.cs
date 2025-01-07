@@ -10,5 +10,5 @@ public class JobMonitoringDbContext : DbContext
 	}
 
     //Code - Approach
-    public DbSet<JMD.Models.JobsData> JobsData { get; set; }
+    public DbSet<JobsData> JobsData { get; set; }
 }

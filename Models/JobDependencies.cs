@@ -1,8 +1,6 @@
-using System;
-
 namespace JMD.Models
 {
-	public class JobDependencies
+    public class JobDependencies
 	{
 		public JobDependencies()
 		{

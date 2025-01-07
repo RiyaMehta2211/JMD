@@ -4,12 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Dapper;
-
+using JMD.Views;
+using Microsoft.EntityFrameworkCore;
 namespace JMD.Controllers
 {
     public class JobController : Controller
     {
-        // GET: HomeController
+        private readonly JobMonitoringDbContext _context;
+        public JobController(JobMonitoringDbContext context)
+        {
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.JobsData.ToListAsync());
+        }
+
+        /*// GET: HomeController
         public ActionResult Index()
         {
             List<JobsData> jobs = new List<JobsData>();
@@ -88,6 +99,6 @@ namespace JMD.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }

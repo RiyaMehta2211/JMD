@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JMD.Models;
+﻿namespace JMD.Models;
 
 public class JobLogs
 {

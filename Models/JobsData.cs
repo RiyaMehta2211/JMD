@@ -1,5 +1,3 @@
-using System;
-
 namespace JMD.Models
 {
     public class JobsData
