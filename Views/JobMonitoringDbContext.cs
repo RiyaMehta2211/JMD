@@ -11,4 +11,8 @@ public class JobMonitoringDbContext : DbContext
 
     //Code - Approach
     public DbSet<JobsData> JobsData { get; set; }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<JobsData>().HasNoKey();
+    }
 }

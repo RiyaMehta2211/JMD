@@ -2,6 +2,7 @@ namespace JMD.Models
 {
     public class JobsData
     {
+        //[Key]
         public JobsData()
         {
 

@@ -6,15 +6,29 @@ using System.Data;
 using Dapper;
 using JMD.Views;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Common;
 namespace JMD.Controllers
 {
-    public class JobController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class JobController : Controller//ControllerBase
     {
         private readonly JobMonitoringDbContext _context;
         public JobController(JobMonitoringDbContext context)
         {
             _context = context;
         }
+        [HttpGet]
+        /*public async Task<ActionResult<IEnumerable<JobsData>>> GetJobs()
+        {
+            var jobs = await _context.JobsData.ToListAsync();
+            foreach (var job in jobs)
+            {
+                Console.WriteLine($"JobID: {job.JobID}, JobName: {job.JobName}");
+            }
+            return jobs;
+            //return await _context.JobsData.ToListAsync();
+        }*/
         public async Task<IActionResult> Index()
         {
             return View(await _context.JobsData.ToListAsync());
