@@ -8,10 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\OldJobController.cs" />
-    <Compile Remove="Migrations\20250108020024_UpdateJobsDataModel.cs" />
-    <Compile Remove="Migrations\20250108020024_UpdateJobsDataModel.Designer.cs" />
-    <Compile Remove="Migrations\JobMonitoringDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,7 +44,6 @@
 
   <ItemGroup>
     <Folder Include="Database\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

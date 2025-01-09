@@ -9,7 +9,7 @@ public class JobMonitoringDbContext : DbContext
 	
 	}
 
-    //Code - Approach
+    //To override the requirement of a primary key in the JobsData table
     public DbSet<JobsData> JobsData { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

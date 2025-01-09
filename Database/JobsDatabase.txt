@@ -1,16 +1,38 @@
-CREATE TABLE Jobs (
-  JobID INT IDENTITY(1,1) PRIMARY KEY,
-  JobType VARCHAR(50) NOT NULL,
-  JobName VARCHAR(100) NOT NULL,
-  JobFrequency VARCHAR(50) NOT NULL,
+USE JMD;
+GO
+
+CREATE TABLE dbo.JobLogs
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	JobID INT,
+	RunDateTime date,
+	job_status NVARCHAR(1000)
 );
 
-CREATE TABLE JobTransactions (
-  JobTransactionID INT IDENTITY(1,1) PRIMARY KEY,
-  Job_Status VARCHAR(50) NOT NULL,
-  LastRunSchedule DATETIME NOT NULL,
-  CONSTRAINT FK_JobTransactionID FOREIGN KEY (JobTransactionID) REFERENCES Jobs(JobID)
+GO
+
+INSERT INTO dbo.JobLogs(JobID, RunDateTime, job_status)
+SELECT jc.Id, jc.ExecuteDate, eth.Status
+FROM MyDashboard.dbo.JobConfiguration jc
+LEFT JOIN MyDashboard.dbo.EmailTemplateHistory eth ON jc.Id = eth.Id;
+GO
+
+CREATE TABLE dbo.Jobs(
+  JobID INT PRIMARY KEY,
+  JobType VARCHAR(50) NOT NULL,
+  JobName NVARCHAR(100),
+  JobFrequency NVARCHAR(100)
 );
+
+GO
+
+INSERT INTO dbo.Jobs(JobID, JobType, JobName, JobFrequency)
+SELECT jc.Id, 'ENE Jobs', jc.ScheduleName, jc.FrequencyType
+FROM MyDashboard.dbo.JobConfiguration jc
+GO
+
+select * from dbo.JobLogs
+select * from dbo.Jobs
 
 CREATE TABLE JobOwners (
   JobOwnerID INT IDENTITY(1,1) PRIMARY KEY,
@@ -44,7 +66,7 @@ SELECT
 FROM 
     Jobs j
 LEFT JOIN
-	JobTransactions jt ON j.JobID = jt.JobTransactionID 
+	JobLogs jl ON j.JobID = jl.JobID 
 LEFT JOIN
     JobOwners jo ON j.JobID = jo.JobOwnerID
 LEFT JOIN
@@ -55,25 +77,41 @@ LEFT JOIN
     downstream.DependencyDirection = -1
 GO
 
-INSERT INTO Jobs (JobType, JobName, JobFrequency)
-VALUES 
-('Type1', 'Job1', 'Daily'),
-('Type2', 'Job2', 'Weekly');
-
-INSERT INTO JobTransactions (Job_Status, LastRunSchedule)
-VALUES 
-('Completed', '2024-10-01 10:00:23'),
-('Failed', '2024-10-01 11:00:26');
 
 
-INSERT INTO JobOwners (JobOwner)
-VALUES 
-('Owner1'),
-('Owner2');
+USE JMD;
+GO
 
-INSERT INTO JobDependencies (DependentJobID, Dependency, DependencyDirection)
-VALUES 
-(1, 'Dependency1', 1),
-(2, 'Dependency2', -1);
+CREATE TABLE dbo.JobLogs
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	JobID INT,
+	RunDateTime date,
+	job_status NVARCHAR(1000)
+);
 
-SELECT * FROM JobsData;
+GO
+
+INSERT INTO dbo.JobLogs(JobID, RunDateTime, job_status)
+SELECT jc.Id, jc.ExecuteDate, eth.Status
+FROM MyDashboard.dbo.JobConfiguration jc
+LEFT JOIN MyDashboard.dbo.EmailTemplateHistory eth ON jc.Id = eth.Id;
+GO
+
+CREATE TABLE dbo.Jobs(
+  JobID INT PRIMARY KEY,
+  JobType VARCHAR(50) NOT NULL,
+  JobName NVARCHAR(100),
+  JobFrequency NVARCHAR(100)
+);
+
+GO
+
+INSERT INTO dbo.Jobs(JobID, JobType, JobName, JobFrequency)
+SELECT jc.Id, 'ENE Jobs', jc.ScheduleName, jc.FrequencyType
+FROM MyDashboard.dbo.JobConfiguration jc
+GO
+
+select * from dbo.JobLogs
+select * from dbo.Jobs
+SELECT * FROM dbo.JobsData;
