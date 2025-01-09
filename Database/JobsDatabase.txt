@@ -53,20 +53,30 @@ CREATE TABLE JobDependencies (
   --CONSTRAINT FK_JobDependencyID FOREIGN KEY (JobDependencyID) REFERENCES Jobs(JobID)
 );
 GO
-CREATE VIEW JobsData AS 
+CREATE TABLE JobsData (
+    JobType VARCHAR(50),
+    JobName NVARCHAR(100),
+    JobFrequency NVARCHAR(100),
+    LastRunSchedule DATE,
+    JobOwner VARCHAR(50),
+    Status NVARCHAR(1000),
+    JobDependencyUpstream VARCHAR(100),
+    JobDependencyDownstream VARCHAR(100)
+);
+INSERT INTO JobsData (JobType, JobName, JobFrequency, LastRunSchedule, JobOwner, Status, JobDependencyUpstream, JobDependencyDownstream)
 SELECT 
     j.JobType,
     j.JobName,
     j.JobFrequency,
-    jt.LastRunSchedule,
-    jo.JobOwner,
-    jt.Job_Status AS Status,
+    jl.RunDateTime AS LastRunSchedule,
+    jo.JobOwnerName AS JobOwner,
+    jl.job_status AS Status,
     upstream.Dependency AS JobDependencyUpstream,
     downstream.Dependency AS JobDependencyDownstream
 FROM 
     Jobs j
 LEFT JOIN
-	JobLogs jl ON j.JobID = jl.JobID 
+    JobLogs jl ON j.JobID = jl.JobID 
 LEFT JOIN
     JobOwners jo ON j.JobID = jo.JobOwnerID
 LEFT JOIN
@@ -74,13 +84,9 @@ LEFT JOIN
     upstream.DependencyDirection = 1
 LEFT JOIN
     JobDependencies downstream ON j.JobID = downstream.DependentJobID AND
-    downstream.DependencyDirection = -1
+    downstream.DependencyDirection = -1;
 GO
 
-
-
-USE JMD;
-GO
 
 CREATE TABLE dbo.JobLogs
 (
