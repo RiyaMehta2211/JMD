@@ -2,11 +2,6 @@ namespace JMD.Models
 {
     public class JobsData
     {
-        //[Key]
-        public JobsData()
-        {
-
-        }
         public int JobID { get; set; }
         public string JobType { get; set; }
         public string JobName { get; set; }
