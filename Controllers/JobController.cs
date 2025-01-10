@@ -25,7 +25,7 @@ namespace JMD.Controllers
             return View(await _context.JobsData.ToListAsync());
         }
 
-        // POST: HomeController/Create
+        // POST: JobController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([FromForm] JobsData model)
