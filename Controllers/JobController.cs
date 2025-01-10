@@ -19,20 +19,65 @@ namespace JMD.Controllers
             _context = context;
         }
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<JobsData>>> GetJobs()
-        {
-            var jobs = await _context.JobsData.ToListAsync();
-            foreach (var job in jobs)
-            {
-                Console.WriteLine($"JobID: {job.JobID}, JobName: {job.JobName}");
-            }
-            return jobs;
-            //return await _context.JobsData.ToListAsync();
-        }*/
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.JobsData.ToListAsync());
         }
+
+        // POST: HomeController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([FromForm] JobsData model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.JobsData.Add(model);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(model);
+            }
+            catch
+            {
+                return View(model);
+            }
+        }
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int id, [FromForm] JobsData model)
+        {
+            try
+            {
+                if (id != model.JobID)
+                {
+                    return BadRequest();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    _context.Entry(model).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(model);
+            }
+            catch
+            {
+                return View(model);
+            }
+        }*/
+        /*public async Task<ActionResult<IEnumerable<JobsData>>> GetJobs() {
+        var jobs = await _context.JobsData.ToListAsync();
+        foreach (var job in jobs)
+        {
+            Console.WriteLine($"JobID: {job.JobID}, JobName: {job.JobName}");
+        }
+        return jobs;
+        //return await _context.JobsData.ToListAsync();
+        }*/
 
         /*// GET: HomeController
         public ActionResult Index()
@@ -44,75 +89,6 @@ namespace JMD.Controllers
                 jobs = db.Query<JobsData>("Select * From JobsData").ToList();
             }
             return View(jobs);
-        }
-
-        // GET: HomeController/Details/5
-       public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: HomeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HomeController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HomeController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: HomeController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HomeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: HomeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }*/
     }
 }
